@@ -71,11 +71,14 @@ function findAddress(str){
 };
 //=========================================
 //geolocation
-$("button_location").click(function(event) {
-  alert("message?: DOMString")
+$("#button_location").click(function(event) {
   GMaps.geolocate({
     success: function(position){
       map.setCenter(position.coords.latitude, position.coords.longitude);
+      map.addMarker({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
     },
     error: function(error){
       alert('Geolocation failed: '+error.message);
@@ -83,8 +86,5 @@ $("button_location").click(function(event) {
     not_supported: function(){
       alert("Your browser does not support geolocation");
     },
-    always: function(){
-      alert("Done!");
-    }
   });
 });
